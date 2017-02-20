@@ -1,29 +1,38 @@
 var express = require('express'),
 	app = express(),
-	http = require('http').Server(app);
+	http = require('http').Server(app),
+	mongoose = require('mongoose'),
+	passport = require('passport'),
+	session = require('express-session'),
+	flash = require('connect-flash'),
+	cookieParser = require('cookie-parser'),
+	bodyParser = require('body-parser')
 
-var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://localhost:27017/';
+var configDB = require('./config/database.js')
 
-MongoClient.connect(url, function(err, db) {
-	if (err) throw err;
+mongoose.connect(configDB.url);
 
-	console.log('Connected to mongo.');
+require('./config/passport')(passport);
 
-	http.listen(3000, function() {
-        console.log('Listening on localhost:3000');
-	});
-});
+app.use(cookieParser());
+app.use(bodyParser());
+
+app.set('view engine', 'ejs');
+
+app.use(session({ 
+	secret: 'bc', 
+	resave: false,
+  	saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+require('./app/routes.js')(app, passport);
 
 app.use(express.static('public'));
 
-app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/index.html');
-});
-
-var server = app.listen(3000, function () {
-   var host = server.address().address;
-   var port = server.address().port;
-   
-   console.log("Listening at http://%s:%s", host, port);
+app.listen(3000, function(){
+	console.log("Connected.");
 });

@@ -19,6 +19,16 @@
     "dependencies": {
         "express": "^4.14.0",
         "mongodb": "^2.2.9",
-        "request": "^2.74.0"
+        "request": "^2.74.0",
+        "mongoose" : "~3.8.1",          
+        "passport" : "~0.1.17",         
+        "passport-local" : "~0.1.6",    
+        "passport-facebook" : "~1.0.2",
+        "connect-flash" : "~0.1.1",     
+        "bcrypt-nodejs" : "latest",
+        "express-session": "~1.0.0", 
+        "cookie-parser": "latest",
+        "body-parser": "latest",
+        "ejs" : "~0.8.5"
     }
 }

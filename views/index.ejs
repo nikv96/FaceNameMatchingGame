@@ -1,0 +1,31 @@
+<html>
+<head>
+	<title>Face Name Matching Game</title>
+	<script>
+		function correct() {
+			alert('Correct');
+		}
+		function wrong() {
+			alert('Wrong');
+		}
+	</script>
+</head>
+<body>
+	<% if (user) { %>
+	<p>
+		<strong>User</strong>: <%= user.local.email %>
+	</p>
+	<% }  else { %>
+	<p>
+		<a href="/login"><button>Login</button></a>
+		or 
+		<a href="/signup"><button>Signup</button></a>
+	</p>
+	<% } %>
+	<h1>Face Name Matching Game!</h1>
+	<a href="" onclick="correct();"><img src="/img/elon.jpg" style="height:300px; width:300px" /></a>
+	<a href="" onclick="wrong();"><img  src="/img/mark.jpeg" style="height:300px; width:300px" /></a>
+
+	<h3>Elon Musk</h3>
+</body>
+</html>
