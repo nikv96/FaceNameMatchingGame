@@ -14,6 +14,7 @@
 	<% if (user) { %>
 	<p>
 		<strong>User</strong>: <%= user.local.email %>
+		<a href="/logout"><button>Logout</button></a>
 	</p>
 	<% }  else { %>
 	<p>
@@ -23,9 +24,8 @@
 	</p>
 	<% } %>
 	<h1>Face Name Matching Game!</h1>
-	<a href="" onclick="correct();"><img src="/img/elon.jpg" style="height:300px; width:300px" /></a>
-	<a href="" onclick="wrong();"><img  src="/img/mark.jpeg" style="height:300px; width:300px" /></a>
-
-	<h3>Elon Musk</h3>
+	<img src="<%= image1 %>" style="height:300px; width:300px" />
+	<a href="" onclick="correct();"><h3><%= name1 %></h3></a>
+	<a href="" onclick="wrong();"><h3><%= name2 %></h3></a>
 </body>
 </html>
