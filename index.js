@@ -19,8 +19,8 @@ app.use(bodyParser());
 
 app.set('view engine', 'ejs');
 
-app.use(session({ 
-	secret: 'bc', 
+app.use(session({
+	secret: 'bc',
 	resave: false,
   	saveUninitialized: true
 }));

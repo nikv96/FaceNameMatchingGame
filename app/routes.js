@@ -13,7 +13,7 @@ module.exports = function(app, passport) {
                 name2: image2.image.name
             });
         });
-        
+
     });
     app.get('/login', function(req, res) {
         res.render('login.ejs');
@@ -35,6 +35,7 @@ module.exports = function(app, passport) {
         req.logout();
         res.redirect('/');
     });
+
 };
 
 function isLoggedIn(req, res, next) {
