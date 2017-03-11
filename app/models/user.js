@@ -6,14 +6,16 @@ var userSchema = mongoose.Schema({
     local            : {
         email        : String,
         password     : String,
-    },
-    facebook         : {
+        name         : String,
+        age          : Number,
+        caregiver    : Boolean
+    }
+    /*,facebook         : {
         id           : String,
         token        : String,
         email        : String,
         name         : String
-    }
-
+    }*/
 });
 
 userSchema.methods.generateHash = function(password) {
