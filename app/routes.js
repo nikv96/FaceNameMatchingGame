@@ -29,8 +29,12 @@ module.exports = function(app, passport) {
         var targetName = req.body.targetName;
         if(selectedName == targetName){
           console.log(selectedName+"=="+targetName+" correct");
+          //todo some logic to update scores
+          res.redirect('/correctguess');
         }else{
           console.log(selectedName+"!="+targetName+" wrong");
+          //todo some logic to update scores
+          res.redirect('/wrongguess');
         }
         //find user
         // var dbQuery = find({})
@@ -64,7 +68,7 @@ module.exports = function(app, passport) {
         res.render('login.ejs');
     });
     app.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/',
+        successRedirect : '/patientmenu',
         failureRedirect : '/login',
         failureFlash : true
     }));
@@ -82,6 +86,15 @@ module.exports = function(app, passport) {
     });
     app.get('/scores',isLoggedIn ,function(req, res) {
         res.render('scores.ejs');
+    })
+    app.get('/correctguess',isLoggedIn ,function(req, res) {
+        res.render('correctguess.ejs');
+    })
+    app.get('/wrongguess',isLoggedIn ,function(req, res) {
+        res.render('wrongguess.ejs');
+    })
+    app.get('/patientmenu',isLoggedIn ,function(req, res) {
+        res.render('patientmenu.ejs');
     })
 
 };
