@@ -1,31 +1,64 @@
+<!DOCTYPE html>
 <html>
+
 <head>
-	<title>Face Name Matching Game</title>
-	<script>
-		function correct() {
-			alert('Correct');
-		}
-		function wrong() {
-			alert('Wrong');
-		}
-	</script>
+    <title>Face-Matching Game</title>
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.min.css">
 </head>
+
 <body>
-	<% if (user) { %>
-	<p>
-		<strong>User</strong>: <%= user.local.email %>
-		<a href="/logout"><button>Logout</button></a>
-	</p>
-	<% }  else { %>
-	<p>
-		<a href="/login"><button>Login</button></a>
-		or 
-		<a href="/signup"><button>Signup</button></a>
-	</p>
-	<% } %>
-	<h1>Face Name Matching Game!</h1>
-	<img src="<%= image1 %>" style="height:300px; width:300px" />
-	<a href="" onclick="correct();"><h3><%= name1 %></h3></a>
-	<a href="" onclick="wrong();"><h3><%= name2 %></h3></a>
+    <div class="row">
+        <div class="col-lg-6 col-xs-6"></div>
+        <div class="col-lg-6 col-xs-6">
+          <div class="col-lg-6 col-lg-push-6 col-md-6 col-md-push-6 col-sm-6 col-sm-push-6 col-xs-6 col-xs-push-6">
+              <strong>User</strong>: <%= user.local.email %>
+              <a href="/logout">
+                <button class="btn btn-link">Logout</button>
+              </a>
+          </div>
+        </div>
+    </div>
+
+    <div class="container" style="margin-top: 100px" enc>
+        <div class="row game">
+            <form action="/" method="post" >
+                <div class="col-md-4">
+                    <div class="row game-option">
+                        <div class="col-md-6 col-md-offset-3">
+                            <button class="btn btn-lg btn-primary btn-block" name="selectedName" type="submit" value="<%=name1%>"><%=name1.split(".")[0]%></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="white-box">
+                        <img src="<%= image.path %>" class="img-responsive">
+                        <input type="hidden" name="targetName" value="<%=image.name%>"/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row game-option">
+                        <div class="col-md-6 col-md-offset-3">
+                            <button class="btn btn-lg btn-primary btn-block" name="selectedName" type="submit" value="<%=name2%>"><%=name2.split(".")[0]%></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form action="/scores" method="get">
+                <div class="col-md-4 col-centered col-md-offset-4" style="margin-top:50px">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <button class="btn btn-lg btn-success btn-block" type="submit">View Scores</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- <script src="js/main.js"></script> -->
 </body>
+
 </html>

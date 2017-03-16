@@ -8,7 +8,7 @@ var imageSchema = mongoose.Schema({
 });
 
 function getRandomInt(min, max) {
-    return 
+    return
 }
 
 imageSchema.methods.getTwoImages = function(callback) {
@@ -26,7 +26,7 @@ imageSchema.methods.getTwoImages = function(callback) {
         }
         callback({"image1":image1, "image2": image2});
     });
-    
+
 }
 
 module.exports = mongoose.model('Images', imageSchema);

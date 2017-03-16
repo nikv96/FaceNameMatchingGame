@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Patient Scores</title>
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.min.css">
+</head>
+
+<body>
+    <div class="container" style="margin-top: 10px">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="white-box">
+                    <canvas id="scoresChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 25px">
+            <div class="col-md-2 col-md-offset-5">
+                <a href="/logout">
+                    <button class="btn btn-lg btn-danger btn-block">Logout</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/chart.js/dist/Chart.min.js"></script>
+    <!-- <script src="js/main.js"></script> -->
+    <script>
+    var ctx = document.getElementById('scoresChart');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            datasets: [{
+                label: '% Correct Guesses',
+                data: [100, 98, 90, 89, 97, 100, 76, 52, 90, 87, 80, 90],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1.0)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+</body>
+
+</html>
