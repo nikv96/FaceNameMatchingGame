@@ -1,19 +1,64 @@
 module.exports = function(app, passport) {
-    app.get('/', function(req, res) {
-        var imageDb = require('./models/images.js');
-        var Image = new imageDb();
-        Image.getTwoImages(function(images){
-            var image1 = images.image1;
-            var image2 = images.image2;
-            console.log(images);
-            res.render('index.ejs', {
-                user: req.user,
-                image1: image1.image.path,
-                name1: image1.image.name,
-                name2: image2.image.name
-            });
-        });
-        
+    app.get('/', isLoggedIn, function(req, res) {
+      var imageDb = require('./models/images.js');
+      var Image = new imageDb();
+
+      Image.getTwoImages(function(images){
+          var image1;
+          var image2;
+          if(Math.random() < 0.5){
+            image1 = images.image1;
+            image2 = images.image2;
+          }else{
+            image1 = images.image2;
+            image2 = images.image1;
+          }
+          // console.log(image1);
+          res.render('index.ejs', {
+              user: req.user,
+              image: image1.image,
+              name1: image1.image.name,
+              name2: image2.image.name
+          });
+      });
+
+    });
+    app.post('/', function(req, res){
+      if(req.body.selectedName !=null && req.body.targetName != null){
+        var selectedName = req.body.selectedName;
+        var targetName = req.body.targetName;
+        if(selectedName == targetName){
+          console.log(selectedName+"=="+targetName+" correct");
+        }else{
+          console.log(selectedName+"!="+targetName+" wrong");
+        }
+        //find user
+        // var dbQuery = find({})
+        req.user
+
+      }
+
+      var imageDb = require('./models/images.js');
+      var Image = new imageDb();
+
+      Image.getTwoImages(function(images){
+          var image1;
+          var image2;
+          if(Math.random() < 0.5){
+            image1 = images.image1;
+            image2 = images.image2;
+          }else{
+            image1 = images.image2;
+            image2 = images.image1;
+          }
+          // console.log(image1);
+          res.render('index.ejs', {
+              user: req.user,
+              image: image1.image,
+              name1: image1.image.name,
+              name2: image2.image.name
+          });
+      });
     });
     app.get('/login', function(req, res) {
         res.render('login.ejs');
@@ -35,10 +80,14 @@ module.exports = function(app, passport) {
         req.logout();
         res.redirect('/');
     });
+    app.get('/scores',isLoggedIn ,function(req, res) {
+        res.render('scores.ejs');
+    })
+
 };
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
-    res.redirect('/');
+    res.redirect('/login');
 }
