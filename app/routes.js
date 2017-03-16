@@ -7,19 +7,22 @@ module.exports = function(app, passport) {
           var image1;
           var image2;
           if(Math.random() < 0.5){
-            image1 = images.image1;
-            image2 = images.image2;
+            res.render('index.ejs', {
+                user: req.user,
+                image: images.image1.image,
+                name1: images.image1.image.name,
+                name2: images.image2.image.name
+            });
           }else{
-            image1 = images.image2;
-            image2 = images.image1;
+            res.render('index.ejs', {
+                user: req.user,
+                image: images.image1.image,
+                name1: images.image2.image.name,
+                name2: images.image1.image.name
+            });
           }
-          // console.log(image1);
-          res.render('index.ejs', {
-              user: req.user,
-              image: image1.image,
-              name1: image1.image.name,
-              name2: image2.image.name
-          });
+
+
       });
 
     });
@@ -30,39 +33,43 @@ module.exports = function(app, passport) {
         if(selectedName == targetName){
           console.log(selectedName+"=="+targetName+" correct");
           //todo some logic to update scores
-          res.redirect('/correctguess');
+          res.render('correctguess.ejs',{
+            user: req.user
+          });
         }else{
           console.log(selectedName+"!="+targetName+" wrong");
           //todo some logic to update scores
-          res.redirect('/wrongguess');
+          res.render('wrongguess.ejs',{
+            user: req.user
+          });
         }
         //find user
         // var dbQuery = find({})
-        req.user
+        // req.user
 
       }
 
-      var imageDb = require('./models/images.js');
-      var Image = new imageDb();
-
-      Image.getTwoImages(function(images){
-          var image1;
-          var image2;
-          if(Math.random() < 0.5){
-            image1 = images.image1;
-            image2 = images.image2;
-          }else{
-            image1 = images.image2;
-            image2 = images.image1;
-          }
-          // console.log(image1);
-          res.render('index.ejs', {
-              user: req.user,
-              image: image1.image,
-              name1: image1.image.name,
-              name2: image2.image.name
-          });
-      });
+      // var imageDb = require('./models/images.js');
+      // var Image = new imageDb();
+      //
+      // Image.getTwoImages(function(images){
+      //     var image1;
+      //     var image2;
+      //     if(Math.random() < 0.5){
+      //       image1 = images.image1;
+      //       image2 = images.image2;
+      //     }else{
+      //       image1 = images.image2;
+      //       image2 = images.image1;
+      //     }
+      //     // console.log(image1);
+      //     res.render('index.ejs', {
+      //         user: req.user,
+      //         image: image1.image,
+      //         name1: image1.image.name,
+      //         name2: image2.image.name
+      //     });
+      // });
     });
     app.get('/login', function(req, res) {
         res.render('login.ejs');
@@ -88,13 +95,19 @@ module.exports = function(app, passport) {
         res.render('scores.ejs');
     })
     app.get('/correctguess',isLoggedIn ,function(req, res) {
-        res.render('correctguess.ejs');
+        res.render('correctguess.ejs',{
+          user: req.user
+        });
     })
     app.get('/wrongguess',isLoggedIn ,function(req, res) {
-        res.render('wrongguess.ejs');
+        res.render('wrongguess.ejs',{
+          user: req.user
+        });
     })
     app.get('/patientmenu',isLoggedIn ,function(req, res) {
-        res.render('patientmenu.ejs');
+        res.render('patientmenu.ejs',{
+          user: req.user
+        });
     })
 
 };
