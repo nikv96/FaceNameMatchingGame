@@ -146,9 +146,27 @@ module.exports = function(app, passport) {
         });
     })
     app.get('/patientmenu',isLoggedIn ,function(req, res) {
+      if (req.user.local.caregiver == true)
+        res.redirect('/caretaker-dashboard');
+      else
         res.render('patientmenu.ejs',{
           user: req.user
         });
+    })
+    app.get('/caretaker-dashboard', isCaretaker, function(req, res) {
+        var usersDb = require('./models/user.js');
+        var User = new usersDb();
+
+        User.generatePatientList(req.user.local.full_name, function(patientOptions){
+          console.log(patientOptions);
+          res.render('caretaker-dashboard.ejs', {
+            user: req.user,
+            patientOptions: patientOptions,
+            patientList: Object.keys(patientOptions)
+          });
+        });
+
+        
     })
 
 };
@@ -156,5 +174,13 @@ module.exports = function(app, passport) {
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
+    res.redirect('/login');
+}
+
+function isCaretaker(req, res, next) {
+    if (req.isAuthenticated() && req.user.local.caregiver == true)
+        return next();
+    else if (req.isAuthenticated())
+        res.redirect('/patientmenu');
     res.redirect('/login');
 }

@@ -33,7 +33,7 @@ require('./app/routes.js')(app, passport);
 
 app.use(express.static('public'));
 
-require('./app/populateDB.js')();
+require('./app/populateImages.js')();
 
 app.listen(3000, function(){
 	console.log("Connected.");
