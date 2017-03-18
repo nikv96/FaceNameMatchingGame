@@ -40,7 +40,7 @@ scoresSchema.methods.generateScoresList = function(users, callback) {
 			returnList[users[i].local.full_name] = {};
 			for (var j = 0; j< scores.length; j++){
 				if (scores[j].patient_name == users[i].local.full_name) {
-					returnList[users[i].local.full_name][scores[j].month] = (scores[i].correctCounts / total) * 100;
+					returnList[users[i].local.full_name][scores[j].month] = (scores[j].correctCounts / total) * 100;
 				}
 			}
 			for (var j=0; j< 12; j++){
