@@ -37,6 +37,7 @@
     <script src="bower_components/chart.js/dist/Chart.min.js"></script>
     <!-- <script src="js/main.js"></script> -->
     <script>
+    console.log(<%= scores %>)
     var ctx = document.getElementById('scoresChart');
     var myChart = new Chart(ctx, {
         type: 'line',
@@ -44,7 +45,7 @@
             labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             datasets: [{
                 label: '% Correct Guesses',
-                data: [100, 98, 90, 89, 97, 100, 76, 52, 90, 87, 80, 90],
+                data: [<%= scores %>],
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1.0)',
                 borderWidth: 1

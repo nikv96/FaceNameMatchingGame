@@ -7,10 +7,6 @@ var imageSchema = mongoose.Schema({
     }
 });
 
-function getRandomInt(min, max) {
-    return
-}
-
 imageSchema.methods.getTwoImages = function(callback) {
     this.model('Images').find({}, function(err, images){
         var max = images.length-1;
