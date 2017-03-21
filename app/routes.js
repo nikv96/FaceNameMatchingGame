@@ -30,7 +30,7 @@ module.exports = function(app, passport) {
         var targetName = req.body.targetName;
         if(selectedName == targetName) {
           console.log(selectedName+"=="+targetName+" correct");
-          
+
           var Scores = require('./models/scores.js');
           var date = new Date();
           Scores.find({patient_name: req.user.local.full_name, month: date.getMonth()}, function(err, scores) {
@@ -64,7 +64,7 @@ module.exports = function(app, passport) {
           });
         } else {
           console.log(selectedName+"!="+targetName+" wrong");
-          
+
           var Scores = require('./models/scores.js')
           var date = new Date();
           Scores.find({patient_name: req.user.local.full_name, month: date.getMonth()}, function(err, scores){
@@ -107,7 +107,7 @@ module.exports = function(app, passport) {
         res.render('signup.ejs');
     });
     app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/',
+        successRedirect : '/patientmenu',
         failureRedirect : '/signup',
         failureFlash : true
     }));
@@ -166,7 +166,7 @@ module.exports = function(app, passport) {
           });
         });
 
-        
+
     })
 
 };
