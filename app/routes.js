@@ -169,6 +169,18 @@ module.exports = function(app, passport) {
 
     })
 
+    app.get('/register-caregiver', isAdmin, function(req, res) {
+        res.render('register-caregiver.ejs', {
+          user: req.user
+        });
+    })
+
+    app.post('/register-caregiver', isAdmin, passport.authenticate('caregiver-register', {
+        successRedirect : '/patientmenu',
+        failureRedirect : '/register-caregiver',
+        failureFlash : true
+    }));
+
     app.get('/caregiver-menu', isCaregiver, function(req, res) {
         res.render('caregiver-menu.ejs', {
           user: req.user,
@@ -259,5 +271,13 @@ function isCaregiver(req, res, next) {
         return next();
     else if (req.isAuthenticated())
         res.redirect('/patientmenu');
+    res.redirect('/login');
+}
+
+function isAdmin(req, res, next) {
+    if (req.isAuthenticated() && req.user.local.email == "a@b.com")
+        return next();
+    else if (req.isAuthenticated())
+        res.redirect('/register-caregiver');
     res.redirect('/login');
 }
