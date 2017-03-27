@@ -275,7 +275,7 @@ function isCaregiver(req, res, next) {
 }
 
 function isAdmin(req, res, next) {
-    if (req.isAuthenticated() && req.user.local.email == "a@b.com")
+    if (req.isAuthenticated() && req.user.local.email == "admin@dementor.com")
         return next();
     else if (req.isAuthenticated())
         res.redirect('/register-caregiver');
