@@ -1,5 +1,5 @@
 # FaceNameMatchingGame
-<i>This project was submitted as part of an assignment to the course CZ3002 - Advanced Software Engineering at Nanyang Technological University and is no longer maintained</i>
+<i>Disclaimer - This project was submitted as part of an assignment to the course CZ3002 - Advanced Software Engineering at Nanyang Technological University and is no longer maintained.</i>
 
 This repository contains a webapp for a simple face name matching game for dementia patients. The app uses node.js at the backend with the express framework and EJS as the rendering engine. The pure front end interface of the game can be found [here](https://github.com/SuyashLakhotia/CZ3002-FrontEnd). The patient is shown a picture of a famous personality and given two names to choose from. The game allows a caretaker to view the patient scores in a graphical format.
 
